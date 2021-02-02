@@ -14,12 +14,23 @@ var wind = document.getElementById('wind');
 var humidity = document.getElementById('humidity');
 var weatherStatus = document.getElementById('weather-status');
 
+var city = document.getElementById('city');
+var country = document.getElementById('country');
+
+var cloudTop = document.getElementById('cloud-top');
+var cloudOne = document.getElementById('cloud-one');
+var cloudTwo = document.getElementById('cloud-two');
+var cloudThree = document.getElementById('cloud-three');
+
 var buttonCels = document.getElementById('button-cels');
 var buttonFar = document.getElementById('button-far');
 
 var weekOne = document.getElementById('week-one');
 var weekTwo = document.getElementById('week-two');
 var weekThree = document.getElementById('week-three');
+
+var celsium;
+var farengeit;
 
 function showTime() {
     let today = new Date(),
@@ -164,6 +175,16 @@ buttonCels.onclick = function(e) {
     } else {
         buttonCels.classList.add("active");
         buttonFar.classList.remove("active");
+        celsium = true;
+        farengeit = false;
+
+        // Пример: (50°F - 32) : 1,8
+
+        temperatureNow.innerHTML = (( +temperatureNow.textContent - 32 ) / 1.8 ).toFixed(0);
+        temperatureFirst.innerHTML = (( +temperatureFirst.textContent - 32 ) / 1.8 ).toFixed(0);
+        temperatureSecond.innerHTML = (( +temperatureSecond.textContent - 32 ) / 1.8 ).toFixed(0);
+        temperatureThird.innerHTML = (( +temperatureThird.textContent - 32 ) / 1.8 ).toFixed(0);
+
     }
 }
 buttonFar.onclick = function(e) {
@@ -172,6 +193,16 @@ buttonFar.onclick = function(e) {
     } else {
         buttonFar.classList.add("active");
         buttonCels.classList.remove("active");
+        celsium = false;
+        farengeit = true;
+
+        // Пример: 10°C x 1,8 + 32 
+        
+        temperatureNow.innerHTML = ( +temperatureNow.textContent * 1.8 + 32 ).toFixed(0);
+        temperatureFirst.innerHTML = ( +temperatureFirst.textContent * 1.8 + 32 ).toFixed(0);
+        temperatureSecond.innerHTML = ( +temperatureSecond.textContent * 1.8 + 32 ).toFixed(0);
+        temperatureThird.innerHTML = ( +temperatureThird.textContent * 1.8 + 32 ).toFixed(0);
+
     }
 }
 
@@ -183,8 +214,8 @@ document.onclick = function(e){
     };
 };
 
-function initMap() {
-    var coordinates = {lat: 53.9, lng: 27.56},
+function initMap(lati, long) {
+    var coordinates = {lat: lati, lng: long},
     zoom = 10,
 
     map = new google.maps.Map(document.getElementById('geo-maps'), {
@@ -212,12 +243,29 @@ function getGeo() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        getCountry(data.ip);
       });
 }
 
-function getWeather() {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Minsk&units=metric&lang=EN&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
+function getCountry(ip) {
+    fetch(
+        `http://api.ipstack.com/${ip}?access_key=4deae11bfceced45baae10b3183da7cc`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+            console.log(data);
+            city.innerHTML = (data.region_name).toUpperCase();
+            country.innerHTML = (data.country_name).toUpperCase();
+            getWeather(data.region_name, data.latitude, data.longitude);
+            initMap(data.latitude, data.longitude);
+      });
+}
+
+
+function getWeather(city, lat, lon) {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=EN&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
         .then((response) => {
             return response.json();
         })
@@ -228,18 +276,27 @@ function getWeather() {
             feelsLike.innerHTML = `Feels like: ${Math.round(data.list[0].main.feels_like)}°`;
             wind.innerHTML = `Wind: ${Math.round(data.list[0].wind.speed)} m/s`;
             humidity.innerHTML = `Humidity: ${Math.round(data.list[0].main.humidity)} %`;
-            temperatureFirst.innerHTML = Math.round(data.list[6].main.temp);
-            temperatureSecond.innerHTML = Math.round(data.list[14].main.temp);
-            temperatureThird.innerHTML = Math.round(data.list[22].main.temp);
 
-            latitude.innerHTML = `Latitude: ${data.city.coord.lat}`;
-            longitude.innerHTML = `Longitude: ${data.city.coord.lon}`;
+            cloudTop.innerHTML = `<img src="icons/animated/${data.list[0].weather[0].icon}.svg" alt="cloud">`;
+
+            temperatureFirst.innerHTML = Math.round(data.list[6].main.temp);
+            cloudOne.innerHTML = `<img src="icons/animated/${data.list[6].weather[0].icon}.svg" alt="cloud">`;
+
+
+            temperatureSecond.innerHTML = Math.round(data.list[14].main.temp);
+            cloudTwo.innerHTML = `<img src="icons/animated/${data.list[14].weather[0].icon}.svg" alt="cloud">`;
+
+
+            temperatureThird.innerHTML = Math.round(data.list[22].main.temp);
+            cloudThree.innerHTML = `<img src="icons/animated/${data.list[22].weather[0].icon}.svg" alt="cloud">`;
+
+
+            latitude.innerHTML = `Latitude: ${lat.toFixed(2)}`;
+            longitude.innerHTML = `Longitude: ${lon.toFixed(2)}`;
         });
 }
 
 
 showTime();
 showDate();
-getWeather();
-initMap();
 getGeo();

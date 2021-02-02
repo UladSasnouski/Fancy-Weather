@@ -42,9 +42,9 @@
                 <section class="weather-today">
                     <div class="weather-title">
                         <div class="weather-city">
-                            <h2>MINSK</h2>
+                            <h2 id="city"></h2>
                             <P>,</P>
-                            <h2>BELARUS</h2>
+                            <h2 id="country"></h2>
                         </div>
                         <div class="weather-now">
                             <div class="weather-date">
@@ -57,60 +57,60 @@
                     </div>
                     <div class="weather-parametric">
                         <div class="weather-temperature">
-                            <h4 id="temperature-now">10</h4>
+                            <h4 id="temperature-now"></h4>
                             <span class="celsiu">°</span>
                         </div>
                         <div class="weather-params">
-                            <p id="weather-status">overcast</p> 
-                            <p id="feels-like">Feels like: 7°</p>
-                            <p id="wind">Wind: 2 m/s </p>
-                            <p id="humidity">Humidity: 83%</p>
+                            <p id="weather-status"></p> 
+                            <p id="feels-like"></p>
+                            <p id="wind"></p>
+                            <p id="humidity"></p>
                         </div>
-                        <div class="weather-cloud">
-                            <img src="./icons/cloud.svg" alt="cloud">
+                        <div id="cloud-top" class="weather-cloud">
+                            
                         </div>
                     </div>
                 </section>
                 <section class="weather-tomorrow">
                     <div class="weather-first">
                         <div class="day-week">
-                            <h5 id="week-one">Tuesday</h5>
+                            <h5 id="week-one"></h5>
                         </div>
                         <div class="day-temperature">
                             <div class="temperature">
-                                <h6 id="temperature-first">7</h6>
+                                <h6 id="temperature-first"></h6>
                             </div>
                             <span class="celsiu-day">°</span>
-                            <div class="day-cloud">
-                                <img src="./icons/cloud-sun.svg" alt="cloud">
+                            <div id="cloud-one" class="day-cloud">
+                    
                             </div>
                         </div>
                     </div>
                     <div class="weather-second">
                         <div class="day-week">
-                            <h5 id="week-two">Wednesday</h5>
+                            <h5 id="week-two"></h5>
                         </div>
                         <div class="day-temperature">
                             <div class="temperature">
-                                <h6 id="temperature-second">6</h6>
+                                <h6 id="temperature-second"></h6>
                             </div>
                             <span class="celsiu-day">°</span>
-                            <div class="day-cloud">
-                                <img src="./icons/cloud-cloud.svg" alt="cloud">
+                            <div id="cloud-two" class="day-cloud">
+                               
                             </div>
                         </div>
                     </div>
                     <div class="weather-third">
                         <div class="day-week">
-                            <h5 id="week-three">Thursday</h5>
+                            <h5 id="week-three"></h5>
                         </div>
                         <div class="day-temperature">
                             <div class="temperature">
-                                <h6 id="temperature-third">3</h6>
+                                <h6 id="temperature-third"></h6>
                             </div>
                             <span class="celsiu-day">°</span>
-                            <div class="day-cloud">
-                                <img src="./icons/cloud-cloud.svg" alt="cloud">
+                            <div id="cloud-three" class="day-cloud">
+                                
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
             <div class="container-right">
                 <section class="geo-location">
                     <div id="geo-maps" class="geo-maps">
-                        
+
                     </div>
                     <div class="geo-gps">
                         <div class="latitude">
