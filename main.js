@@ -1,5 +1,5 @@
-const   time = document.getElementById('time'),
-        dateNow = document.getElementById('date');
+const time = document.getElementById('time'),
+    dateNow = document.getElementById('date');
 
 var rotate = document.getElementById('refresh');
 var input = document.querySelector('input');
@@ -14,7 +14,7 @@ var wind = document.getElementById('wind');
 var humidity = document.getElementById('humidity');
 var weatherStatus = document.getElementById('weather-status');
 
-var city = document.getElementById('city');
+var cityes = document.getElementById('city');
 var country = document.getElementById('country');
 
 var cloudTop = document.getElementById('cloud-top');
@@ -24,22 +24,34 @@ var cloudThree = document.getElementById('cloud-three');
 
 var buttonCels = document.getElementById('button-cels');
 var buttonFar = document.getElementById('button-far');
+var buttonLang = document.getElementById('button-lang');
 
 var weekOne = document.getElementById('week-one');
 var weekTwo = document.getElementById('week-two');
 var weekThree = document.getElementById('week-three');
 
+
+var textLang = document.getElementById('textLang');
+var textSearch = document.getElementById('textSearch');
+var textFeels = document.getElementById('textFeels');
+var textWind = document.getElementById('textWind');
+var textHumidity = document.getElementById('textHumidity');
+var textLatitude = document.getElementById('textLatitude');
+var textLongitude = document.getElementById('textLongitude');
+
 var celsium;
 var farengeit;
 
+var lang = localStorage.getItem('language');
+
 function showTime() {
     let today = new Date(),
-      hour = today.getHours(),
-      min = today.getMinutes(),
-      sec = today.getSeconds();
-  
+        hour = today.getHours(),
+        min = today.getMinutes(),
+        sec = today.getSeconds();
+
     time.innerHTML = `${hour}<span> : </span>${addZero(min)}<span> : </span>${addZero(sec)}`;
-  
+
     setTimeout(showTime, 1000);
 }
 
@@ -49,128 +61,263 @@ function addZero(n) {
 
 function showDate() {
     let todayDate = new Date(),
-      day = todayDate.getDate(),
-      month = todayDate.getMonth(),
-      week = todayDate.getDay();
+        day = todayDate.getDate(),
+        month = todayDate.getMonth(),
+        week = todayDate.getDay();
 
-    switch (week) {
-        case 0:
-            week = 'Sun';
-            weekOne.innerHTML = 'Monday';
-            weekTwo.innerHTML = 'Tuesday';
-            weekThree.innerHTML = 'Wednesday';
-            break;
-        case 1:
-            week = 'Mon';
-            weekOne.innerHTML = 'Tuesday';
-            weekTwo.innerHTML = 'Wednesday';
-            weekThree.innerHTML = 'Thursday';
-            break;
-        case 2:
-            week = 'Tues';
-            weekOne.innerHTML = 'Wednesday';
-            weekTwo.innerHTML = 'Thursday';
-            weekThree.innerHTML = 'Friday';
-            break;
-        case 3:
-            week = 'Wed';
-            weekOne.innerHTML = 'Thursday';
-            weekTwo.innerHTML = 'Friday';
-            weekThree.innerHTML = 'Saturday';
-            break;
-        case 4:
-            week = 'Thur';
-            weekOne.innerHTML = 'Friday';
-            weekTwo.innerHTML = 'Saturday';
-            weekThree.innerHTML = 'Sunday';
-            break;
-        case 5:
-            week = 'Fri';
-            weekOne.innerHTML = 'Saturday';
-            weekTwo.innerHTML = 'Sunday';
-            weekThree.innerHTML = 'Monday';
-            break;
-        case 6:
-            week = 'Sat';
-            weekOne.innerHTML = 'Sunday';
-            weekTwo.innerHTML = 'Monday';
-            weekThree.innerHTML = 'Tuesday';
-            break;
-    }
+    if (localStorage.getItem('language') === 'EN') {
+        textLang.innerHTML = 'EN';
+        textSearch.innerHTML = 'SEARCH';
+        textFeels.innerHTML = 'FEELS LIKE: ';
+        textWind.innerHTML = 'WIND: ';
+        textHumidity.innerHTML = 'HUMIDITY: ';
+        textLatitude.innerHTML = 'Latitude:';
+        textLongitude.innerHTML = 'Longitude:';
 
-    switch (month) {
-        case 0:
-            month = 'January';
-            break;
-        case 1:
-            month = 'February';
-            break;
-        case 2:
-            month = 'March';
-            break;
-        case 3:
-            month = 'April';
-            break;
-        case 4:
-            month = 'May';
-            break;
-        case 5:
-            month = 'June';
-            break;
-        case 6:
-            month = 'July';
-            break;
-        case 7:
-            month = 'August';
-            break;
-        case 8:
-            month = 'September';
-            break;
-        case 9:
-            month = 'October';
-            break;
-        case 10:
-            month = 'November';
-            break;
-        case 11:
-            month = 'December';
-            break;    
+        switch (week) {
+            case 0:
+                week = 'Sun';
+                weekOne.innerHTML = 'Monday';
+                weekTwo.innerHTML = 'Tuesday';
+                weekThree.innerHTML = 'Wednesday';
+                break;
+            case 1:
+                week = 'Mon';
+                weekOne.innerHTML = 'Tuesday';
+                weekTwo.innerHTML = 'Wednesday';
+                weekThree.innerHTML = 'Thursday';
+                break;
+            case 2:
+                week = 'Tues';
+                weekOne.innerHTML = 'Wednesday';
+                weekTwo.innerHTML = 'Thursday';
+                weekThree.innerHTML = 'Friday';
+                break;
+            case 3:
+                week = 'Wed';
+                weekOne.innerHTML = 'Thursday';
+                weekTwo.innerHTML = 'Friday';
+                weekThree.innerHTML = 'Saturday';
+                break;
+            case 4:
+                week = 'Thur';
+                weekOne.innerHTML = 'Friday';
+                weekTwo.innerHTML = 'Saturday';
+                weekThree.innerHTML = 'Sunday';
+                break;
+            case 5:
+                week = 'Fri';
+                weekOne.innerHTML = 'Saturday';
+                weekTwo.innerHTML = 'Sunday';
+                weekThree.innerHTML = 'Monday';
+                break;
+            case 6:
+                week = 'Sat';
+                weekOne.innerHTML = 'Sunday';
+                weekTwo.innerHTML = 'Monday';
+                weekThree.innerHTML = 'Tuesday';
+                break;
+        }
+        switch (month) {
+            case 0:
+                month = 'January';
+                break;
+            case 1:
+                month = 'February';
+                break;
+            case 2:
+                month = 'March';
+                break;
+            case 3:
+                month = 'April';
+                break;
+            case 4:
+                month = 'May';
+                break;
+            case 5:
+                month = 'June';
+                break;
+            case 6:
+                month = 'July';
+                break;
+            case 7:
+                month = 'August';
+                break;
+            case 8:
+                month = 'September';
+                break;
+            case 9:
+                month = 'October';
+                break;
+            case 10:
+                month = 'November';
+                break;
+            case 11:
+                month = 'December';
+                break;
+        }
+
+    } else if (localStorage.getItem('language') === 'RU') {
+        textLang.innerHTML = 'РУ';
+        textSearch.innerHTML = 'ПОИСК';
+        textFeels.innerHTML = 'ОЩУЩАЕТСЯ: ';
+        textWind.innerHTML = 'ВЕТЕР: ';
+        textHumidity.innerHTML = 'ВЛАЖНОСТЬ: ';
+        textLatitude.innerHTML = 'Широта:';
+        textLongitude.innerHTML = 'Долгота:';
+
+        switch (week) {
+            case 0:
+                week = 'Вс';
+                weekOne.innerHTML = 'Понедельник';
+                weekTwo.innerHTML = 'Вторник';
+                weekThree.innerHTML = 'Среда';
+                break;
+            case 1:
+                week = 'Пн';
+                weekOne.innerHTML = 'Вторник';
+                weekTwo.innerHTML = 'Среда';
+                weekThree.innerHTML = 'Четверг';
+                break;
+            case 2:
+                week = 'Вт';
+                weekOne.innerHTML = 'Среда';
+                weekTwo.innerHTML = 'Четверг';
+                weekThree.innerHTML = 'Пятница';
+                break;
+            case 3:
+                week = 'Ср';
+                weekOne.innerHTML = 'Четверг';
+                weekTwo.innerHTML = 'Пятница';
+                weekThree.innerHTML = 'Суббота';
+                break;
+            case 4:
+                week = 'Чт';
+                weekOne.innerHTML = 'Пятница';
+                weekTwo.innerHTML = 'Суббота';
+                weekThree.innerHTML = 'Воскресенье';
+                break;
+            case 5:
+                week = 'Пт';
+                weekOne.innerHTML = 'Суббота';
+                weekTwo.innerHTML = 'Воскресенье';
+                weekThree.innerHTML = 'Понедельник';
+                break;
+            case 6:
+                week = 'Сб';
+                weekOne.innerHTML = 'Воскресенье';
+                weekTwo.innerHTML = 'Понедельник';
+                weekThree.innerHTML = 'Вторник';
+                break;
+        }
+        switch (month) {
+            case 0:
+                month = 'Январь';
+                break;
+            case 1:
+                month = 'Февраль';
+                break;
+            case 2:
+                month = 'Март';
+                break;
+            case 3:
+                month = 'Апрель';
+                break;
+            case 4:
+                month = 'Май';
+                break;
+            case 5:
+                month = 'Июнь';
+                break;
+            case 6:
+                month = 'Июль';
+                break;
+            case 7:
+                month = 'Август';
+                break;
+            case 8:
+                month = 'Сентябрь';
+                break;
+            case 9:
+                month = 'Октябрь';
+                break;
+            case 10:
+                month = 'Ноябрь';
+                break;
+            case 11:
+                month = 'Декабрь';
+                break;
+        }
     }
 
     dateNow.innerHTML = `${week}<span> </span>${day}<span> </span>${month}`;
-  
+
     setTimeout(showTime, 1000);
 }
 
-refresh.onclick = function() {
+refresh.onclick = function () {
     rotate.classList.add("rotate");
     let randomBg = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
+
     let background = `url(./background/${randomBg}.jpg) no-repeat center center fixed`;
 
-    setTimeout( function() {
+    setTimeout(function () {
         document.body.style.background = background;
         rotate.classList.remove("rotate");
 
         openBg;
         let opa = 0;
 
-        var openBg = setInterval( function() {
+        var openBg = setInterval(function () {
             opa++;
             document.body.style.opacity = opa / 10;
-            if ( opa === 10 ) {
+            if (opa === 10) {
                 clearInterval(openBg);
             }
         }, 100)
     }, 1000);
 }
 
-input.onclick = function() {
+input.onclick = function () {
     if (input.value === 'Search city or ZIP') {
+        input.value = '';
+    } else if (input.value === 'Искать город или почтовый индекс') {
         input.value = '';
     }
 }
-buttonCels.onclick = function(e) {
-    if( this.classList.contains('active') ) {
+
+buttonLang.onclick = function (e) {
+
+
+    if (lang === 'EN') {
+        lang = 'RU';
+        localStorage.setItem('language', lang);
+        textLang.innerHTML = 'РУ';
+        textFeels.innerHTML = 'ОЩУЩАЕТСЯ: ';
+        textWind.innerHTML = 'ВЕТЕР: ';
+        textHumidity.innerHTML = 'ВЛАЖНОСТЬ: ';
+        input.value === 'Искать город или почтовый индекс';
+        textSearch.innerHTML = 'ПОИСК';
+        textLatitude.innerHTML = 'Широта:';
+        textLongitude.innerHTML = 'Долгота:';
+        showDate();
+    } else if (lang === 'RU') {
+        lang = 'EN';
+        localStorage.setItem('language', lang);
+        textLang.innerHTML = 'EN';
+        textFeels.innerHTML = 'FEELS LIKE: ';
+        textWind.innerHTML = 'WIND: ';
+        textHumidity.innerHTML = 'HUMIDITY: ';
+        input.value === 'Search city or ZIP';
+        textSearch.innerHTML = 'SEARCH';
+        textLatitude.innerHTML = 'Latitude:';
+        textLongitude.innerHTML = 'Longitude:';
+        showDate();
+    }
+}
+
+buttonCels.onclick = function (e) {
+    if (this.classList.contains('active')) {
         return false;
     } else {
         buttonCels.classList.add("active");
@@ -178,17 +325,19 @@ buttonCels.onclick = function(e) {
         celsium = true;
         farengeit = false;
 
+        localStorage.setItem('temp-status', 'celsium');
+
         // Пример: (50°F - 32) : 1,8
 
-        temperatureNow.innerHTML = (( +temperatureNow.textContent - 32 ) / 1.8 ).toFixed(0);
-        temperatureFirst.innerHTML = (( +temperatureFirst.textContent - 32 ) / 1.8 ).toFixed(0);
-        temperatureSecond.innerHTML = (( +temperatureSecond.textContent - 32 ) / 1.8 ).toFixed(0);
-        temperatureThird.innerHTML = (( +temperatureThird.textContent - 32 ) / 1.8 ).toFixed(0);
+        temperatureNow.innerHTML = ((+temperatureNow.textContent - 32) / 1.8).toFixed(0);
+        temperatureFirst.innerHTML = ((+temperatureFirst.textContent - 32) / 1.8).toFixed(0);
+        temperatureSecond.innerHTML = ((+temperatureSecond.textContent - 32) / 1.8).toFixed(0);
+        temperatureThird.innerHTML = ((+temperatureThird.textContent - 32) / 1.8).toFixed(0);
 
     }
 }
-buttonFar.onclick = function(e) {
-    if( this.classList.contains('active') ) {
+buttonFar.onclick = function (e) {
+    if (this.classList.contains('active')) {
         return false;
     } else {
         buttonFar.classList.add("active");
@@ -196,107 +345,193 @@ buttonFar.onclick = function(e) {
         celsium = false;
         farengeit = true;
 
+        localStorage.setItem('temp-status', 'farengeit');
+
         // Пример: 10°C x 1,8 + 32 
-        
-        temperatureNow.innerHTML = ( +temperatureNow.textContent * 1.8 + 32 ).toFixed(0);
-        temperatureFirst.innerHTML = ( +temperatureFirst.textContent * 1.8 + 32 ).toFixed(0);
-        temperatureSecond.innerHTML = ( +temperatureSecond.textContent * 1.8 + 32 ).toFixed(0);
-        temperatureThird.innerHTML = ( +temperatureThird.textContent * 1.8 + 32 ).toFixed(0);
+
+        temperatureNow.innerHTML = (+temperatureNow.textContent * 1.8 + 32).toFixed(0);
+        temperatureFirst.innerHTML = (+temperatureFirst.textContent * 1.8 + 32).toFixed(0);
+        temperatureSecond.innerHTML = (+temperatureSecond.textContent * 1.8 + 32).toFixed(0);
+        temperatureThird.innerHTML = (+temperatureThird.textContent * 1.8 + 32).toFixed(0);
 
     }
 }
 
-document.onclick = function(e){
-    if ( event.target != input ) {
+document.onclick = function (e) {
+    if (event.target != input) {
         if (input.value === '') {
-            input.value = 'Search city or ZIP';
+            if (lang === 'EN') {
+                input.value = 'Search city or ZIP';
+            } else {
+                input.value = 'Искать город или почтовый индекс';
+            }
         }
     };
 };
 
 function initMap(lati, long) {
-    var coordinates = {lat: lati, lng: long},
-    zoom = 10,
+    var coordinates = { lat: lati, lng: long },
+        zoom = 10,
 
-    map = new google.maps.Map(document.getElementById('geo-maps'), {
-        center: coordinates,
-        zoom: zoom,
-        disableDefaultUI: true
-    }),
+        map = new google.maps.Map(document.getElementById('geo-maps'), {
+            center: coordinates,
+            zoom: zoom,
+            disableDefaultUI: true
+        }),
 
-    marker = new google.maps.Marker({
-        position: coordinates,
-        map: map
-    });
+        marker = new google.maps.Marker({
+            position: coordinates,
+            map: map
+        });
+}
 
-    marker.addListener('click', function () {
-        marker.setAnimation(null);
-    });
-
+function getNewCity() {
+    localSearch = (document.getElementById('yourSearch')).value;
+    getWeather(localSearch);
+    console.log(localSearch);
+    localSearch = 'Search city or ZIP';
 }
 
 function getGeo() {
     fetch(
-      "https://ipinfo.io/json?token=603648da1a2c04"
+        "https://ipinfo.io/json?token=603648da1a2c04"
     )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        getCountry(data.ip);
-      });
-}
-
-function getCountry(ip) {
-    fetch(
-        `http://api.ipstack.com/${ip}?access_key=4deae11bfceced45baae10b3183da7cc`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-            console.log(data);
-            city.innerHTML = (data.region_name).toUpperCase();
-            country.innerHTML = (data.country_name).toUpperCase();
-            getWeather(data.region_name, data.latitude, data.longitude);
-            initMap(data.latitude, data.longitude);
-      });
-}
-
-
-function getWeather(city, lat, lon) {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=EN&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
         .then((response) => {
             return response.json();
         })
-        .then((data) => {   
-            console.log(data);
-            temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
-            weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
-            feelsLike.innerHTML = `Feels like: ${Math.round(data.list[0].main.feels_like)}°`;
-            wind.innerHTML = `Wind: ${Math.round(data.list[0].wind.speed)} m/s`;
-            humidity.innerHTML = `Humidity: ${Math.round(data.list[0].main.humidity)} %`;
-
-            cloudTop.innerHTML = `<img src="icons/animated/${data.list[0].weather[0].icon}.svg" alt="cloud">`;
-
-            temperatureFirst.innerHTML = Math.round(data.list[6].main.temp);
-            cloudOne.innerHTML = `<img src="icons/animated/${data.list[6].weather[0].icon}.svg" alt="cloud">`;
-
-
-            temperatureSecond.innerHTML = Math.round(data.list[14].main.temp);
-            cloudTwo.innerHTML = `<img src="icons/animated/${data.list[14].weather[0].icon}.svg" alt="cloud">`;
-
-
-            temperatureThird.innerHTML = Math.round(data.list[22].main.temp);
-            cloudThree.innerHTML = `<img src="icons/animated/${data.list[22].weather[0].icon}.svg" alt="cloud">`;
-
-
-            latitude.innerHTML = `Latitude: ${lat.toFixed(2)}`;
-            longitude.innerHTML = `Longitude: ${lon.toFixed(2)}`;
+        .then((data) => {
+            getWeather(data.city)
         });
+}
+
+function getWeather(city) {
+    if (localStorage.getItem('temp-status') === 'farengeit') {
+        buttonFar.classList.add("active");
+        buttonCels.classList.remove("active");
+        celsium = false;
+        farengeit = true;
+
+        let langu = lang;
+        langu.toLowerCase();
+
+
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=${langu}&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
+                weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
+                feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}°`;
+                wind.innerHTML = `${Math.round(data.list[0].wind.speed)} m/s`;
+                humidity.innerHTML = `${Math.round(data.list[0].main.humidity)} %`;
+
+                cloudTop.innerHTML = `<img src="icons/animated/${data.list[0].weather[0].icon}.svg" alt="cloud">`;
+
+                temperatureFirst.innerHTML = Math.round(data.list[6].main.temp);
+                cloudOne.innerHTML = `<img src="icons/animated/${data.list[6].weather[0].icon}.svg" alt="cloud">`;
+
+
+                temperatureSecond.innerHTML = Math.round(data.list[14].main.temp);
+                cloudTwo.innerHTML = `<img src="icons/animated/${data.list[14].weather[0].icon}.svg" alt="cloud">`;
+
+
+                temperatureThird.innerHTML = Math.round(data.list[22].main.temp);
+                cloudThree.innerHTML = `<img src="icons/animated/${data.list[22].weather[0].icon}.svg" alt="cloud">`;
+
+                latitude.innerHTML = `${data.city.coord.lat.toFixed(2)}`;
+                longitude.innerHTML = `${data.city.coord.lon.toFixed(2)}`;
+
+                let regionNames = new Intl.DisplayNames([`${langu}`], { type: 'region' });
+
+                cityes.innerHTML = `${data.city.name}`;
+                country.innerHTML = regionNames.of(`${data.city.country}`);
+
+                temperatureNow.innerHTML = (+temperatureNow.textContent * 1.8 + 32).toFixed(0);
+                temperatureFirst.innerHTML = (+temperatureFirst.textContent * 1.8 + 32).toFixed(0);
+                temperatureSecond.innerHTML = (+temperatureSecond.textContent * 1.8 + 32).toFixed(0);
+                temperatureThird.innerHTML = (+temperatureThird.textContent * 1.8 + 32).toFixed(0);
+
+                let latit = data.city.coord.lat;
+                let lonit = data.city.coord.lon;
+
+
+
+                initMap(latit, lonit);
+
+
+                document.body.classList.add('loaded_hiding');
+                window.setTimeout(function () {
+                    document.body.classList.add('loaded');
+                    document.body.classList.remove('loaded_hiding');
+                }, 1000);
+
+            });
+
+    } else {
+        buttonCels.classList.add("active");
+        buttonFar.classList.remove("active");
+        celsium = true;
+        farengeit = false;
+
+        let langu = lang;
+        langu.toLowerCase();
+
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=${langu}&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
+                weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
+                feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}°`;
+                wind.innerHTML = `${Math.round(data.list[0].wind.speed)} m/s`;
+                humidity.innerHTML = `${Math.round(data.list[0].main.humidity)} %`;
+
+                cloudTop.innerHTML = `<img src="icons/animated/${data.list[0].weather[0].icon}.svg" alt="cloud">`;
+
+                temperatureFirst.innerHTML = Math.round(data.list[6].main.temp);
+                cloudOne.innerHTML = `<img src="icons/animated/${data.list[6].weather[0].icon}.svg" alt="cloud">`;
+
+
+                temperatureSecond.innerHTML = Math.round(data.list[14].main.temp);
+                cloudTwo.innerHTML = `<img src="icons/animated/${data.list[14].weather[0].icon}.svg" alt="cloud">`;
+
+
+                temperatureThird.innerHTML = Math.round(data.list[22].main.temp);
+                cloudThree.innerHTML = `<img src="icons/animated/${data.list[22].weather[0].icon}.svg" alt="cloud">`;
+
+                let regionNames = new Intl.DisplayNames([`${langu}`], { type: 'region' });
+
+                cityes.innerHTML = `${data.city.name}`;
+                country.innerHTML = regionNames.of(`${data.city.country}`);
+
+
+                latitude.innerHTML = `${data.city.coord.lat.toFixed(2)}`;
+                longitude.innerHTML = `${data.city.coord.lon.toFixed(2)}`;
+
+                let latit = data.city.coord.lat;
+                let lonit = data.city.coord.lon;
+
+
+
+                initMap(latit, lonit);
+
+                document.body.classList.add('loaded_hiding');
+                window.setTimeout(function () {
+                    document.body.classList.add('loaded');
+                    document.body.classList.remove('loaded_hiding');
+                }, 1000);
+
+            });
+    }
+
 }
 
 
 showTime();
 showDate();
 getGeo();
+

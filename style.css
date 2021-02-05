@@ -1,14 +1,16 @@
 html {
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
-  
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
 }
-  
+
 body {
-    overflow:  hidden;
+    overflow: hidden;
     background: url(./background/0.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -17,9 +19,9 @@ body {
     padding: 0;
     margin: 0;
 }
-  
+
 .no-loaded {
-      display: none;
+    display: none;
 }
 
 .container {
@@ -35,18 +37,18 @@ body {
 
 input {
     padding-left: 15px !important;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 17px;
     display: flex;
     align-items: center;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 button p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -56,14 +58,13 @@ button p {
 
 input,
 button {
-    border:none;
-    background:none;
-    outline:none;
-    padding:0;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
     box-shadow: none;
     width: 100%;
     height: 100%;
-    
 }
 
 .header {
@@ -77,6 +78,7 @@ button {
     display: flex;
     flex-wrap: wrap;
     box-sizing: content-box;
+    overflow: hidden;
 }
 
 .button-find img {
@@ -115,18 +117,18 @@ button {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .button-far {
-    color: #FFFFFF;
+    color: #ffffff;
     min-width: 44px;
     min-height: 44px;
     margin-left: 5px;
@@ -137,7 +139,7 @@ button {
 }
 
 .button-cels {
-    color: #FFFFFF;
+    color: #ffffff;
     min-width: 44px;
     min-height: 44px;
     max-height: 44px;
@@ -202,22 +204,32 @@ main {
     padding: 10px 90px 0px 0px;
 }
 
+.latitude,
+.longitude {
+    display: flex;
+    justify-content: flex-end;
+}
+.latitude p,
+.longitude p {
+    position: relative;
+    padding-right: 15px;
+    top: -3px;
+}
+
 .latitude h3,
 .longitude h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
     text-align: right;
     text-transform: capitalize;
-    color: #FFFFFF;
+    color: #ffffff;
     display: flex;
     justify-content: flex-end;
     margin: 0;
 }
-
-
 
 .weather-city,
 .weather-now,
@@ -227,68 +239,68 @@ main {
 }
 
 h4 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 306px;
     line-height: 373px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
 }
 
 h5 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
     line-height: 27px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
 }
 
 h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 80px;
     line-height: 98px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
 }
 
 p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
     line-height: 37px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
 }
 
 h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
     line-height: 37px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
 }
 
 h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
     line-height: 37px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
 }
 
@@ -311,7 +323,7 @@ h3 {
     align-items: flex-end;
     text-align: center;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     top: -300px;
     right: -300px;
 }
@@ -319,7 +331,7 @@ h3 {
 .celsiu-day {
     font-size: 100px;
     line-height: 115px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .weather-cloud {
@@ -370,28 +382,128 @@ h3 {
     animation: rotate 1s cubic-bezier(1, 0, 0, 1);
 }
 
+.show {
+    display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
 
-@keyframes move { 
-    0% { 
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+@keyframes move {
+    0% {
         padding: 0px 0px 0px 400px;
     }
-    25% { 
+    25% {
         padding: 0px 0px 0px 340px;
     }
-    50% { 
+    50% {
         padding: -20px 0px 0px 335px;
     }
-    75% { 
+    75% {
         padding: -30px 0px 0px 370px;
     }
     100% {
         padding: 0px 0px 0px 400px;
-   }
+    }
 }
 
 @keyframes rotate {
     to {
         transform: rotate(360deg);
     }
-  }
+}
 
+.preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    z-index: 1001;
+}
+
+.preloader__row {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    margin-left: -35px;
+    text-align: center;
+    animation: preloader-rotate 2s infinite linear;
+}
+
+.preloader__item {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    background-color: #dee1e4;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    animation: preloader-bounce 2s infinite ease-in-out;
+}
+
+.preloader__item:last-child {
+    top: auto;
+    bottom: 0;
+    animation-delay: -1s;
+}
+
+.rowses {
+    display: flex;
+}
+
+.rowses p {
+    padding-right: 15px;
+}
+
+@keyframes preloader-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes preloader-bounce {
+    0%,
+    100% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+.loaded_hiding .preloader {
+    transition: 1s opacity;
+    opacity: 0;
+}
+
+.loaded .preloader {
+    display: none;
+}

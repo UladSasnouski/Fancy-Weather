@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="preloader">
+        <div class="preloader__row">
+            <div class="preloader__item"></div>
+            <div class="preloader__item"></div>
+        </div>
+    </div>
     <div class="container">
         <section class="header">
             <div class="header-left">
@@ -17,8 +25,10 @@
                         <img id="refresh" src="./icons/Wheel.svg" alt="Wheel">
                     </button>
                 </div>
-                <div class="button-lang">
-                    <button><p>EN</p><img src="./icons/Stroke.svg" alt="stroke"></button>
+                <div id="button-lang" class="button-lang">
+                    <button>
+                        <p id="textLang"></p><img src="./icons/Stroke.svg" alt="stroke">
+                    </button>
                 </div>
                 <div id="button-far" class="button-far">
                     <button><img src="./icons/F.svg" alt="far"></button>
@@ -29,11 +39,13 @@
             </div>
             <div class="header-right">
                 <div class="button-find">
-                    <input class="search-field" type="text" value="Search city or ZIP">
+                    <input class="search-field" id="yourSearch" type="text" value="Search city or ZIP">
                     <img id="voice-trigger" src="./icons/Vector.svg" alt="vector">
                 </div>
                 <div class="button-search">
-                    <button>SEARCH</button>
+                    <button onClick="getNewCity()">
+                        <p id="textSearch"></p>
+                    </button>
                 </div>
             </div>
         </section>
@@ -61,13 +73,24 @@
                             <span class="celsiu">°</span>
                         </div>
                         <div class="weather-params">
-                            <p id="weather-status"></p> 
-                            <p id="feels-like"></p>
-                            <p id="wind"></p>
-                            <p id="humidity"></p>
+                            <div class="rowses">
+                                <p id="weather-status"></p>
+                            </div>
+                            <div class="rowses">
+                                <p id="textFeels"></p>
+                                <p id="feels-like"></p>
+                            </div>
+                            <div class="rowses">
+                                <p id="textWind"></p>
+                                <p id="wind"></p>
+                            </div>
+                            <div class="rowses">
+                                <p id="textHumidity"></p>
+                                <p id="humidity"></p>
+                            </div>
                         </div>
                         <div id="cloud-top" class="weather-cloud">
-                            
+
                         </div>
                     </div>
                 </section>
@@ -82,7 +105,7 @@
                             </div>
                             <span class="celsiu-day">°</span>
                             <div id="cloud-one" class="day-cloud">
-                    
+
                             </div>
                         </div>
                     </div>
@@ -96,7 +119,7 @@
                             </div>
                             <span class="celsiu-day">°</span>
                             <div id="cloud-two" class="day-cloud">
-                               
+
                             </div>
                         </div>
                     </div>
@@ -110,7 +133,7 @@
                             </div>
                             <span class="celsiu-day">°</span>
                             <div id="cloud-three" class="day-cloud">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -123,10 +146,12 @@
                     </div>
                     <div class="geo-gps">
                         <div class="latitude">
-                            <h3 id="latitude">Latitude: 53°54'</h3>
+                            <p id="textLatitude"></p>
+                            <h3 id="latitude"></h3>
                         </div>
                         <div class="longitude">
-                            <h3 id="longitude">Longitude: 27°34'</h3>
+                            <p id="textLongitude"></p>
+                            <h3 id="longitude"></h3>
                         </div>
                     </div>
                 </section>
@@ -137,4 +162,5 @@
     <script src="./voice.js"></script>
     <script src="./main.js"></script>
 </body>
+
 </html>
