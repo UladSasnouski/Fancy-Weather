@@ -39,6 +39,8 @@ var textHumidity = document.getElementById('textHumidity');
 var textLatitude = document.getElementById('textLatitude');
 var textLongitude = document.getElementById('textLongitude');
 
+var localCity;
+
 var celsium;
 var farengeit;
 
@@ -300,6 +302,7 @@ buttonLang.onclick = function (e) {
         textSearch.innerHTML = 'ПОИСК';
         textLatitude.innerHTML = 'Широта:';
         textLongitude.innerHTML = 'Долгота:';
+        getWeather(localCity);
         showDate();
     } else if (lang === 'RU') {
         lang = 'EN';
@@ -312,6 +315,7 @@ buttonLang.onclick = function (e) {
         textSearch.innerHTML = 'SEARCH';
         textLatitude.innerHTML = 'Latitude:';
         textLongitude.innerHTML = 'Longitude:';
+        getWeather(localCity);
         showDate();
     }
 }
@@ -333,6 +337,7 @@ buttonCels.onclick = function (e) {
         temperatureFirst.innerHTML = ((+temperatureFirst.textContent - 32) / 1.8).toFixed(0);
         temperatureSecond.innerHTML = ((+temperatureSecond.textContent - 32) / 1.8).toFixed(0);
         temperatureThird.innerHTML = ((+temperatureThird.textContent - 32) / 1.8).toFixed(0);
+        feelsLike.innerHTML = ((+feelsLike.textContent - 32) / 1.8).toFixed(0);
 
     }
 }
@@ -353,6 +358,7 @@ buttonFar.onclick = function (e) {
         temperatureFirst.innerHTML = (+temperatureFirst.textContent * 1.8 + 32).toFixed(0);
         temperatureSecond.innerHTML = (+temperatureSecond.textContent * 1.8 + 32).toFixed(0);
         temperatureThird.innerHTML = (+temperatureThird.textContent * 1.8 + 32).toFixed(0);
+        feelsLike.innerHTML = (+feelsLike.textContent * 1.8 + 32).toFixed(0);
 
     }
 }
@@ -405,6 +411,7 @@ function getGeo() {
 }
 
 function getWeather(city) {
+    localCity = city;
     if (localStorage.getItem('temp-status') === 'farengeit') {
         buttonFar.classList.add("active");
         buttonCels.classList.remove("active");
@@ -423,7 +430,7 @@ function getWeather(city) {
                 console.log(data);
                 temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
                 weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
-                feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}°`;
+                feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}`;
                 wind.innerHTML = `${Math.round(data.list[0].wind.speed)} m/s`;
                 humidity.innerHTML = `${Math.round(data.list[0].main.humidity)} %`;
 
@@ -452,6 +459,7 @@ function getWeather(city) {
                 temperatureFirst.innerHTML = (+temperatureFirst.textContent * 1.8 + 32).toFixed(0);
                 temperatureSecond.innerHTML = (+temperatureSecond.textContent * 1.8 + 32).toFixed(0);
                 temperatureThird.innerHTML = (+temperatureThird.textContent * 1.8 + 32).toFixed(0);
+                feelsLike.innerHTML = (+feelsLike.textContent * 1.8 + 32).toFixed(0);
 
                 let latit = data.city.coord.lat;
                 let lonit = data.city.coord.lon;
@@ -486,7 +494,7 @@ function getWeather(city) {
                 console.log(data);
                 temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
                 weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
-                feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}°`;
+                feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}`;
                 wind.innerHTML = `${Math.round(data.list[0].wind.speed)} m/s`;
                 humidity.innerHTML = `${Math.round(data.list[0].main.humidity)} %`;
 
