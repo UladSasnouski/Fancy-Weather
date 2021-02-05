@@ -44,7 +44,8 @@ var localCity;
 var celsium;
 var farengeit;
 
-var lang = localStorage.getItem('language');
+var lang = 'EN';
+localStorage.setItem('language', lang);
 
 function showTime() {
     let today = new Date(),
@@ -67,7 +68,7 @@ function showDate() {
         month = todayDate.getMonth(),
         week = todayDate.getDay();
 
-    if (localStorage.getItem('language') === 'EN') {
+    if (localStorage.getItem('language') === 'EN' || lang === 'EN') {
         textLang.innerHTML = 'EN';
         textSearch.innerHTML = 'SEARCH';
         textFeels.innerHTML = 'FEELS LIKE: ';
@@ -159,7 +160,7 @@ function showDate() {
                 break;
         }
 
-    } else if (localStorage.getItem('language') === 'RU') {
+    } else if (localStorage.getItem('language') === 'RU' || lang === 'RU') {
         textLang.innerHTML = 'РУ';
         textSearch.innerHTML = 'ПОИСК';
         textFeels.innerHTML = 'ОЩУЩАЕТСЯ: ';

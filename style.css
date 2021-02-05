@@ -313,19 +313,17 @@ h3 {
     z-index: 10;
 }
 
+.weather-temperature {
+    display: flex;
+}
+
 .celsiu {
-    position: relative;
-    font-style: normal;
-    font-weight: bold;
+    padding-top: 50px;
     font-size: 100px;
     line-height: 0px;
-    display: flex;
+    justify-content: flex-start;
     align-items: flex-end;
-    text-align: center;
-    text-transform: uppercase;
     color: #ffffff;
-    top: -300px;
-    right: -300px;
 }
 
 .celsiu-day {
