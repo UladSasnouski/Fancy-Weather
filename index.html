@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
 </head>
 
 <body>
@@ -79,10 +80,12 @@
                             <div class="rowses">
                                 <p id="textFeels"></p>
                                 <p id="feels-like"></p>
+                                <p>°</p>
                             </div>
                             <div class="rowses">
                                 <p id="textWind"></p>
                                 <p id="wind"></p>
+                                <p id="textWindParam"></p>
                             </div>
                             <div class="rowses">
                                 <p id="textHumidity"></p>
@@ -138,6 +141,9 @@
                         </div>
                     </div>
                 </section>
+                <div id="error-message" class="error-message">
+                    <h6 id="textError"></h6>
+                </div>
             </div>
             <div class="container-right">
                 <section class="geo-location">

@@ -15,6 +15,7 @@ recognizer.onresult = function (event) {
   var result = event.results[event.resultIndex];
   if (result.isFinal) {
     input.value = `${result[0].transcript}`;
+    getNewCity();
   } else {
     console.log('Промежуточный результат: ', result[0].transcript);
   }
@@ -23,6 +24,6 @@ recognizer.onresult = function (event) {
 // Начинаем слушать микрофон и распознавать голос
 
 
-voiceRecord.onclick = function() {
-    recognizer.start()
+voiceRecord.onclick = function () {
+  recognizer.start()
 }

@@ -17,6 +17,8 @@ var weatherStatus = document.getElementById('weather-status');
 var cityes = document.getElementById('city');
 var country = document.getElementById('country');
 
+var errorMessage = document.getElementById('error-message');
+
 var cloudTop = document.getElementById('cloud-top');
 var cloudOne = document.getElementById('cloud-one');
 var cloudTwo = document.getElementById('cloud-two');
@@ -35,25 +37,35 @@ var textLang = document.getElementById('textLang');
 var textSearch = document.getElementById('textSearch');
 var textFeels = document.getElementById('textFeels');
 var textWind = document.getElementById('textWind');
+var textWindParam = document.getElementById('textWindParam');
 var textHumidity = document.getElementById('textHumidity');
 var textLatitude = document.getElementById('textLatitude');
 var textLongitude = document.getElementById('textLongitude');
 
 var localCity;
 
+var timeUT;
+
 var celsium;
 var farengeit;
 
-var lang = 'EN';
-localStorage.setItem('language', lang);
+var lang;
 
 function showTime() {
     let today = new Date(),
-        hour = today.getHours(),
-        min = today.getMinutes(),
-        sec = today.getSeconds();
+        hour = today.getUTCHours(),
+        min = today.getUTCMinutes(),
+        sec = today.getUTCSeconds();
 
-    time.innerHTML = `${hour}<span> : </span>${addZero(min)}<span> : </span>${addZero(sec)}`;
+    var static = timeUT / 3600;
+
+    var hourUTC = (+hour + static);
+
+    if (hourUTC < 0) {
+        hourUTC = 24 + hourUTC;
+    };
+
+    time.innerHTML = `${hourUTC}<span> : </span>${addZero(min)}<span> : </span>${addZero(sec)}`;
 
     setTimeout(showTime, 1000);
 }
@@ -73,6 +85,7 @@ function showDate() {
         textSearch.innerHTML = 'SEARCH';
         textFeels.innerHTML = 'FEELS LIKE: ';
         textWind.innerHTML = 'WIND: ';
+        textWindParam.innerHTML = 'm/s';
         textHumidity.innerHTML = 'HUMIDITY: ';
         textLatitude.innerHTML = 'Latitude:';
         textLongitude.innerHTML = 'Longitude:';
@@ -165,6 +178,7 @@ function showDate() {
         textSearch.innerHTML = 'ПОИСК';
         textFeels.innerHTML = 'ОЩУЩАЕТСЯ: ';
         textWind.innerHTML = 'ВЕТЕР: ';
+        textWindParam.innerHTML = 'м/с';
         textHumidity.innerHTML = 'ВЛАЖНОСТЬ: ';
         textLatitude.innerHTML = 'Широта:';
         textLongitude.innerHTML = 'Долгота:';
@@ -258,6 +272,18 @@ function showDate() {
     setTimeout(showTime, 1000);
 }
 
+function UpdateImage() {
+    rotate.classList.add("rotate");
+    let randomBg = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
+
+    let background = `url(./background/${randomBg}.jpg) no-repeat center center fixed`;
+
+    setTimeout(function () {
+        document.body.style.background = background;
+        rotate.classList.remove("rotate");
+    }, 1000);
+}
+
 refresh.onclick = function () {
     rotate.classList.add("rotate");
     let randomBg = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
@@ -298,6 +324,7 @@ buttonLang.onclick = function (e) {
         textLang.innerHTML = 'РУ';
         textFeels.innerHTML = 'ОЩУЩАЕТСЯ: ';
         textWind.innerHTML = 'ВЕТЕР: ';
+        textWindParam.innerHTML = 'м/с';
         textHumidity.innerHTML = 'ВЛАЖНОСТЬ: ';
         input.value === 'Искать город или почтовый индекс';
         textSearch.innerHTML = 'ПОИСК';
@@ -311,6 +338,7 @@ buttonLang.onclick = function (e) {
         textLang.innerHTML = 'EN';
         textFeels.innerHTML = 'FEELS LIKE: ';
         textWind.innerHTML = 'WIND: ';
+        textWindParam.innerHTML = 'm/s';
         textHumidity.innerHTML = 'HUMIDITY: ';
         input.value === 'Search city or ZIP';
         textSearch.innerHTML = 'SEARCH';
@@ -319,6 +347,7 @@ buttonLang.onclick = function (e) {
         getWeather(localCity);
         showDate();
     }
+    UpdateImage();
 }
 
 buttonCels.onclick = function (e) {
@@ -339,7 +368,7 @@ buttonCels.onclick = function (e) {
         temperatureSecond.innerHTML = ((+temperatureSecond.textContent - 32) / 1.8).toFixed(0);
         temperatureThird.innerHTML = ((+temperatureThird.textContent - 32) / 1.8).toFixed(0);
         feelsLike.innerHTML = ((+feelsLike.textContent - 32) / 1.8).toFixed(0);
-
+        UpdateImage();
     }
 }
 buttonFar.onclick = function (e) {
@@ -360,7 +389,7 @@ buttonFar.onclick = function (e) {
         temperatureSecond.innerHTML = (+temperatureSecond.textContent * 1.8 + 32).toFixed(0);
         temperatureThird.innerHTML = (+temperatureThird.textContent * 1.8 + 32).toFixed(0);
         feelsLike.innerHTML = (+feelsLike.textContent * 1.8 + 32).toFixed(0);
-
+        UpdateImage();
     }
 }
 
@@ -374,6 +403,11 @@ document.onclick = function (e) {
             }
         }
     };
+    if (errorMessage.classList.contains('open-error')) {
+        errorMessage.classList.remove('open-error');
+    } else {
+        return 0;
+    }
 };
 
 function initMap(lati, long) {
@@ -424,15 +458,20 @@ function getWeather(city) {
 
 
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=${langu}&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
-            .then((response) => {
-                return response.json();
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.log('Что-то пошло не так :(')
+                    return Promise.reject(response);
+                }
             })
             .then((data) => {
                 console.log(data);
                 temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
                 weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
                 feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}`;
-                wind.innerHTML = `${Math.round(data.list[0].wind.speed)} m/s`;
+                wind.innerHTML = `${Math.round(data.list[0].wind.speed)}`;
                 humidity.innerHTML = `${Math.round(data.list[0].main.humidity)} %`;
 
                 cloudTop.innerHTML = `<img src="icons/animated/${data.list[0].weather[0].icon}.svg" alt="cloud">`;
@@ -468,7 +507,10 @@ function getWeather(city) {
 
 
                 initMap(latit, lonit);
-
+                timeUT = data.city.timezone;
+                showTime();
+                console.log(data.city.timezone);
+                UpdateImage();
 
                 document.body.classList.add('loaded_hiding');
                 window.setTimeout(function () {
@@ -476,6 +518,15 @@ function getWeather(city) {
                     document.body.classList.remove('loaded_hiding');
                 }, 1000);
 
+            })
+            .catch((error) => {
+                errorMessage.classList.add('open-error');
+                let textError = document.getElementById('textError');
+                if (localStorage.getItem('language') === 'EN' || lang === 'EN') {
+                    textError.innerHTML = 'Ops... Invalid request :('
+                } else if (localStorage.getItem('language') === 'RU' || lang === 'RU') {
+                    textError.innerHTML = 'Ой... Что-то пошло не так :('
+                }
             });
 
     } else {
@@ -488,15 +539,20 @@ function getWeather(city) {
         langu.toLowerCase();
 
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=${langu}&appid=ff0534b467d145be778cd1ec2930ac63`) // btu - фаренгейты , metric - цельсия
-            .then((response) => {
-                return response.json();
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    console.log('Что-то пошло не так :(')
+                    return Promise.reject(response);
+                }
             })
             .then((data) => {
                 console.log(data);
                 temperatureNow.innerHTML = Math.round(data.list[0].main.temp);
                 weatherStatus.innerHTML = `${data.list[0].weather[0].description}`;
                 feelsLike.innerHTML = `${Math.round(data.list[0].main.feels_like)}`;
-                wind.innerHTML = `${Math.round(data.list[0].wind.speed)} m/s`;
+                wind.innerHTML = `${Math.round(data.list[0].wind.speed)}`;
                 humidity.innerHTML = `${Math.round(data.list[0].main.humidity)} %`;
 
                 cloudTop.innerHTML = `<img src="icons/animated/${data.list[0].weather[0].icon}.svg" alt="cloud">`;
@@ -527,20 +583,49 @@ function getWeather(city) {
 
 
                 initMap(latit, lonit);
+                timeUT = data.city.timezone;
+                showTime();
+                console.log(data.city.timezone);
+                UpdateImage();
 
                 document.body.classList.add('loaded_hiding');
                 window.setTimeout(function () {
                     document.body.classList.add('loaded');
                     document.body.classList.remove('loaded_hiding');
-                }, 1000);
+                }, 5000);
 
+            })
+            .catch((error) => {
+                errorMessage.classList.add('open-error');
+                let textError = document.getElementById('textError');
+                if (localStorage.getItem('language') === 'EN' || lang === 'EN') {
+                    textError.innerHTML = 'Ops... Invalid request :('
+                } else if (localStorage.getItem('language') === 'RU' || lang === 'RU') {
+                    textError.innerHTML = 'Ой... Что-то пошло не так :('
+                }
             });
     }
 
 }
 
+document.getElementById('yourSearch').addEventListener('keydown', function (e) {
+    if (e.keyCode === 13) {
+        getNewCity()
+    }
+});
 
-showTime();
-showDate();
-getGeo();
+function onLoadPage() {
+    if (localStorage.getItem('language') === null) {
+        lang = 'EN';
+        localStorage.setItem('language', lang);
+        getGeo();
+        showDate();
+    } else {
+        lang = localStorage.getItem('language');
+        getGeo();
+        showDate();
+    }
+}
+
+onLoadPage();
 
