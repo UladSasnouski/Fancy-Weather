@@ -1,5 +1,5 @@
 export function UpdateImage() {
-    alert('OK. Works');
+    var rotate = document.getElementById('refresh');
     rotate.classList.add("rotate");
     let randomBg = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
 

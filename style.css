@@ -272,6 +272,10 @@ main {
     display: flex;
 }
 
+.weather-parametric {
+    position: relative;
+}
+
 h4 {
     font-family: "Montserrat", sans-serif;
     font-style: normal;
@@ -367,14 +371,15 @@ h3 {
 }
 
 .weather-cloud {
-    position: fixed;
-    padding: -50px 0px 0px 400px;
+    position: absolute;
+    padding: -50px 0px 0px 500px;
     animation: move 15s linear 0s infinite;
 }
 
 .weather-cloud img {
     margin-top: -50px;
     min-width: 250px;
+    margin-left: 100px;
 }
 
 .day-temperature {

@@ -1,7 +1,5 @@
 const time = document.getElementById('time'),
     dateNow = document.getElementById('date');
-
-var rotate = document.getElementById('refresh');
 var input = document.querySelector('input');
 var temperatureNow = document.getElementById('temperature-now');
 var temperatureFirst = document.getElementById('temperature-first');
@@ -42,6 +40,9 @@ var textHumidity = document.getElementById('textHumidity');
 var textLatitude = document.getElementById('textLatitude');
 var textLongitude = document.getElementById('textLongitude');
 
+var localSear = document.getElementById('yourSearch');
+var getNewCityes = document.getElementById('getNewCity');
+
 var localCity;
 
 var timeUT;
@@ -68,8 +69,6 @@ function showTime() {
     };
 
     time.innerHTML = `${hourUTC}<span> : </span>${addZero(min)}<span> : </span>${addZero(sec)}`;
-
-    setTimeout(showTime, 1000);
 }
 
 function addZero(n) {
@@ -270,8 +269,6 @@ function showDate() {
     }
 
     dateNow.innerHTML = `${week}<span> </span>${day}<span> </span>${month}`;
-
-    setTimeout(showTime, 1000);
 }
 
 refresh.onclick = function () {
@@ -319,6 +316,10 @@ buttonLang.onclick = function (e) {
         showDate();
     }
     UpdateImage();
+}
+
+getNewCityes.onclick = function () {
+    getNewCity();
 }
 
 buttonCels.onclick = function (e) {
@@ -397,8 +398,8 @@ function initMap(lati, long) {
         });
 }
 
-function getNewCity() {
-    localSearch = (document.getElementById('yourSearch')).value;
+export function getNewCity() {
+    let localSearch = localSear.value;
     getWeather(localSearch);
     console.log(localSearch);
     localSearch = 'Search city or ZIP';
@@ -599,3 +600,4 @@ function onLoadPage() {
 }
 
 onLoadPage();
+setInterval(showTime, 1000);

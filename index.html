@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fancy Weather</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
@@ -44,7 +45,7 @@
                     <img id="voice-trigger" src="./icons/Vector.svg" alt="vector">
                 </div>
                 <div class="button-search">
-                    <button onClick="getNewCity()">
+                    <button id="getNewCity">
                         <p id="textSearch"></p>
                     </button>
                 </div>
@@ -165,7 +166,7 @@
         </main>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyKJKzqwroZyIH0AYNAWwz5b9hn3NQg6E"></script>
-    <script src="./voice.js"></script>
+    <script type="module" src="./voice.js"></script>
     <script type="module" src="./main.js"></script>
 </body>
 
