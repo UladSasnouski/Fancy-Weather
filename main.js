@@ -57,9 +57,9 @@ function showTime() {
         min = today.getUTCMinutes(),
         sec = today.getUTCSeconds();
 
-    var static = timeUT / 3600;
+    var statka = timeUT / 3600;
 
-    var hourUTC = (+hour + static);
+    var hourUTC = (+hour + statka);
 
     if (hourUTC < 0) {
         hourUTC = 24 + hourUTC;
@@ -285,26 +285,7 @@ function UpdateImage() {
 }
 
 refresh.onclick = function () {
-    rotate.classList.add("rotate");
-    let randomBg = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
-
-    let background = `url(./background/${randomBg}.jpg) no-repeat center center fixed`;
-
-    setTimeout(function () {
-        document.body.style.background = background;
-        rotate.classList.remove("rotate");
-
-        openBg;
-        let opa = 0;
-
-        var openBg = setInterval(function () {
-            opa++;
-            document.body.style.opacity = opa / 10;
-            if (opa === 10) {
-                clearInterval(openBg);
-            }
-        }, 100)
-    }, 1000);
+    UpdateImage();
 }
 
 input.onclick = function () {

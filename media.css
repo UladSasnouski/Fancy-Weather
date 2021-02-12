@@ -1,4 +1,4 @@
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: 1750px) {
     .geo-maps {
         width: 475px;
         height: 275px;
@@ -17,11 +17,10 @@
         border: 1px solid rgba(228, 227, 227, 0.2);
     }
 }
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1550px) {
     main {
         display: block;
         width: 100%;
-        height: 100vh;
         flex: unset;
     }
     .container-left {
@@ -50,7 +49,7 @@
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1000px) {
     .button-find {
         display: flex;
         min-width: 174px;
@@ -86,7 +85,7 @@
     }
 }
 
-@media only screen and (max-width: 690px) {
+@media only screen and (max-width: 780px) {
     .geo-maps {
         width: 350px;
         height: 200px;
@@ -95,6 +94,60 @@
     }
     .weather-tomorrow {
         flex-direction: column;
+    }
+    h4 {
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 200px;
+        line-height: 373px;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .weather-cloud {
+        display: none;
+        position: fixed;
+        padding: -50px 0px 0px 400px;
+        animation: move 15s linear 0s infinite;
+    }
+    .weather-parametric {
+        display: block;
+    }
+    .weather-params {
+        padding: 10px 0px 20px 10px;
+        z-index: 10;
+    }
+    h4 {
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 150px;
+        line-height: unset;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin: 0;
+    }
+    .rowses {
+        justify-content: center;
+    }
+
+    .weather-temperature {
+        justify-content: center;
+    }
+    .weather-city,
+    .weather-now {
+        display: flex;
+        justify-content: center;
+    }
+    .geo-gps {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 10px 0px 0px 0px;
     }
 }
 
@@ -105,5 +158,44 @@
         box-sizing: content-box;
         overflow: unset;
         padding-top: 10px;
+    }
+    .geo-maps {
+        width: 250px;
+        height: 200px;
+        margin: 0px;
+        border-radius: 10px;
+        padding: 0px 10px 0px 10px;
+    }
+}
+@media only screen and (max-width: 365px) {
+    .button-search {
+        min-width: 70px;
+        min-height: 44px;
+        max-height: 44px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: rgba(174, 181, 185, 0.5);
+        border: 1px solid rgba(228, 227, 227, 0.2);
+    }
+    .button-find {
+        display: flex;
+        min-width: 174px;
+        min-height: 44px;
+        margin-left: 5px;
+        max-height: 44px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background: rgba(76, 82, 85, 0.4);
+        border: 1px solid rgba(228, 227, 227, 0.2);
+    }
+    .weather-now {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .weather-date,
+    .weather-time {
+        display: flex;
+        justify-content: center;
     }
 }

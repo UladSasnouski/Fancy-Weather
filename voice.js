@@ -1,3 +1,4 @@
+
 var voiceRecord = document.getElementById('voice-trigger');
 var input = document.querySelector('input');
 
