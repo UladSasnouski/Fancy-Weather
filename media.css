@@ -48,6 +48,7 @@
         justify-content: space-evenly;
         flex-direction: unset;
         padding: 10px 0px 0px 0px;
+        height: 100%;
     }
 }
 
@@ -150,6 +151,12 @@
         align-items: center;
         flex-direction: column;
         padding: 10px 0px 0px 0px;
+    }
+    .latitude,
+    .longitude {
+        margin-top: -50%;
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
