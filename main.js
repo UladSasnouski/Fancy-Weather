@@ -51,6 +51,8 @@ var farengeit;
 
 var lang;
 
+import { UpdateImage } from './modules/image.js';
+
 function showTime() {
     let today = new Date(),
         hour = today.getUTCHours(),
@@ -270,18 +272,6 @@ function showDate() {
     dateNow.innerHTML = `${week}<span> </span>${day}<span> </span>${month}`;
 
     setTimeout(showTime, 1000);
-}
-
-function UpdateImage() {
-    rotate.classList.add("rotate");
-    let randomBg = Math.floor(Math.random() * (6 - 0 + 1)) + 0;
-
-    let background = `url(./background/${randomBg}.jpg) no-repeat center center fixed`;
-
-    setTimeout(function () {
-        document.body.style.background = background;
-        rotate.classList.remove("rotate");
-    }, 1000);
 }
 
 refresh.onclick = function () {
@@ -609,4 +599,3 @@ function onLoadPage() {
 }
 
 onLoadPage();
-
