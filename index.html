@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fancy Weather</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="preloader__row">
+            <div class="preloader__item"></div>
+            <div class="preloader__item"></div>
+        </div>
+    </div>
+    <div class="container">
+        <section class="header">
+            <div class="header-left">
+                <div class="button-bg">
+                    <button>
+                        <img id="refresh" src="./icons/Wheel.svg" alt="Wheel">
+                    </button>
+                </div>
+                <div id="button-lang" class="button-lang">
+                    <button>
+                        <p id="textLang"></p><img src="./icons/Stroke.svg" alt="stroke">
+                    </button>
+                </div>
+                <div id="button-far" class="button-far">
+                    <button><img src="./icons/F.svg" alt="far"></button>
+                </div>
+                <div id="button-cels" class="button-cels active">
+                    <button><img src="./icons/С.svg" alt="cels"></button>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="button-find">
+                    <input class="search-field" id="yourSearch" type="text" value="Search city or ZIP">
+                    <img id="voice-trigger" src="./icons/Vector.svg" alt="vector">
+                </div>
+                <div class="button-search">
+                    <button id="getNewCity">
+                        <p id="textSearch"></p>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <main>
+            <div class="container-left">
+                <section class="weather-today">
+                    <div class="weather-title">
+                        <div class="weather-city">
+                            <h2 id="city"></h2>
+                            <P>,</P>
+                            <h2 id="country"></h2>
+                        </div>
+                        <div class="weather-now">
+                            <div class="weather-date">
+                                <h3 id="date"></h3>
+                            </div>
+                            <div class="weather-time">
+                                <h3 id="time"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-parametric">
+                        <div class="weather-temperature">
+                            <h4 id="temperature-now"></h4>
+                            <span class="celsiu">°</span>
+                        </div>
+                        <div class="weather-params">
+                            <div class="rowses">
+                                <p id="weather-status"></p>
+                            </div>
+                            <div class="rowses">
+                                <p id="textFeels"></p>
+                                <p id="feels-like"></p>
+                                <p>°</p>
+                            </div>
+                            <div class="rowses">
+                                <p id="textWind"></p>
+                                <p id="wind"></p>
+                                <p id="textWindParam"></p>
+                            </div>
+                            <div class="rowses">
+                                <p id="textHumidity"></p>
+                                <p id="humidity"></p>
+                            </div>
+                        </div>
+                        <div id="cloud-top" class="weather-cloud">
+
+                        </div>
+                    </div>
+                </section>
+                <section class="weather-tomorrow">
+                    <div class="weather-first">
+                        <div class="day-week">
+                            <h5 id="week-one"></h5>
+                        </div>
+                        <div class="day-temperature">
+                            <div class="temperature">
+                                <h6 id="temperature-first"></h6>
+                            </div>
+                            <span class="celsiu-day">°</span>
+                            <div id="cloud-one" class="day-cloud">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-second">
+                        <div class="day-week">
+                            <h5 id="week-two"></h5>
+                        </div>
+                        <div class="day-temperature">
+                            <div class="temperature">
+                                <h6 id="temperature-second"></h6>
+                            </div>
+                            <span class="celsiu-day">°</span>
+                            <div id="cloud-two" class="day-cloud">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-third">
+                        <div class="day-week">
+                            <h5 id="week-three"></h5>
+                        </div>
+                        <div class="day-temperature">
+                            <div class="temperature">
+                                <h6 id="temperature-third"></h6>
+                            </div>
+                            <span class="celsiu-day">°</span>
+                            <div id="cloud-three" class="day-cloud">
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div id="error-message" class="error-message">
+                    <h6 id="textError"></h6>
+                </div>
+            </div>
+            <div class="container-right">
+                <section class="geo-location">
+                    <div id="geo-maps" class="geo-maps">
+
+                    </div>
+                    <div class="geo-gps">
+                        <div class="latitude">
+                            <p id="textLatitude"></p>
+                            <h3 id="latitude"></h3>
+                        </div>
+                        <div class="longitude">
+                            <p id="textLongitude"></p>
+                            <h3 id="longitude"></h3>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyKJKzqwroZyIH0AYNAWwz5b9hn3NQg6E"></script>
+    <script type="module" src="./voice.js"></script>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
